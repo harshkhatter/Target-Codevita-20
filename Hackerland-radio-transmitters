@@ -1,0 +1,50 @@
+# https://www.hackerrank.com/challenges/hackerland-radio-transmitters
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the hackerlandRadioTransmitters function below.
+def hackerlandRadioTransmitters(x, k):
+
+    # sort the house array
+    x.sort()
+    
+    # take initial variables
+    i, pos, ans = 0, x[0], 1
+    
+    # traverse all houses one by one
+    for j in range(1, len(x)):
+        # check the range of transmitter
+        if x[j] - x[i] <= k:
+            pos = x[j]
+        elif x[j] - pos <= k:
+            continue
+        else:
+            i, pos, ans = j, x[j], ans + 1
+            
+    # return the count of transmitter
+    return ans
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    x = list(map(int, input().rstrip().split()))
+
+    result = hackerlandRadioTransmitters(x, k)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+# https://www.hackerrank.com/challenges/hackerland-radio-transmitters
